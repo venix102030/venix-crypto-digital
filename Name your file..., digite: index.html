@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10141d">
+<title>Venix Crypto Digital</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#10141d;color:#fff;
+ font-family:Arial,sans-serif;
+}
+header{
+ padding:22px 18px;background:#171e2a;
+ border-bottom:1px solid #30394a;
+}
+.logo{font-size:25px;font-weight:bold;color:#f7931a}
+.logo span{color:white}
+header small{color:#9da9bb}
+main{padding:18px;max-width:600px;margin:auto}
+.card{
+ background:#1b2432;border:1px solid #303b4d;
+ border-radius:15px;padding:20px;margin-bottom:16px;
+}
+.label{color:#aab5c5;font-size:13px}
+.balance{font-size:30px;font-weight:bold;margin:12px 0}
+.btc{color:#f7931a}
+button{
+ border:0;border-radius:10px;padding:14px;
+ font-size:15px;font-weight:bold;cursor:pointer;
+}
+.primary{background:#f7931a;color:#111;width:100%}
+.secondary{background:#303b4d;color:white;width:100%;margin-top:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.value{font-size:20px;font-weight:bold;margin-top:10px}
+.status{color:#f7931a;font-size:14px}
+input{
+ width:100%;padding:13px;border-radius:9px;
+ background:#101722;color:white;border:1px solid #39475b;
+ margin:10px 0;
+}
+footer{text-align:center;color:#78869a;padding:25px;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">VENIX <span>CRYPTO</span></div>
+ <small>DIGITAL MINING PLATFORM</small>
+</header>
+
+<main>
+ <div class="card">
+  <div class="label">SALDO DEMONSTRATIVO</div>
+  <div class="balance btc" id="balance">0.00000000 BTC</div>
+  <div class="label">Carteira de demonstração</div>
+ </div>
+
+ <div class="grid">
+  <div class="card">
+   <div class="label">MINERAÇÃO</div>
+   <div class="value status" id="status">Desligada</div>
+  </div>
+  <div class="card">
+   <div class="label">HASHRATE</div>
+   <div class="value" id="hash">0 TH/s</div>
+  </div>
+ </div>
+
+ <div class="card">
+  <h3>Painel de mineração</h3>
+  <p class="label">Simule o funcionamento da plataforma.</p>
+  <button class="primary" onclick="toggleMining()" id="mineBtn">
+   INICIAR DEMONSTRAÇÃO
+  </button>
+  <p class="label" id="message">Nenhuma mineradora conectada.</p>
+ </div>
+
+ <div class="card">
+  <h3>Conectar mineradora</h3>
+  <p class="label">Área preparada para futuras integrações via API.</p>
+  <input id="provider" placeholder="Nome da mineradora">
+  <button class="secondary" onclick="connect()">CADASTRAR INTEGRAÇÃO</button>
+  <p class="label" id="connection">Nenhuma integração cadastrada.</p>
+ </div>
+
+ <div class="card">
+  <h3>Histórico de operações</h3>
+  <p class="label" id="history">Nenhuma operação registrada.</p>
+ </div>
+</main>
+
+<footer>
+ VENIX CRYPTO DIGITAL V1.0<br>
+ Protótipo demonstrativo. Sem mineração ou pagamentos reais.
+</footer>
+
+<script>
+let mining=false;
+let balance=0;
+let timer=null;
+
+function toggleMining(){
+ mining=!mining;
+ document.getElementById("status").textContent=
+ mining?"Demonstração ativa":"Desligada";
+ document.getElementById("hash").textContent=
+ mining?"100 TH/s (simulado)":"0 TH/s";
+ document.getElementById("mineBtn").textContent=
+ mining?"PARAR DEMONSTRAÇÃO":"INICIAR DEMONSTRAÇÃO";
+ document.getElementById("message").textContent=
+ mining?"Simulação em execução. Nenhum BTC real está sendo minerado.":"Demonstração pausada.";
+ if(mining){
+  addHistory("Demonstração iniciada");
+  timer=setInterval(()=>{
+   balance+=0.00000001;
+   document.getElementById("balance").textContent=
+   balance.toFixed(8)+" BTC (SIMULADO)";
+  },3000);
+ }else{
+  clearInterval(timer);
+  addHistory("Demonstração pausada");
+ }
+}
+
+function addHistory(text){
+ document.getElementById("history").textContent=
+ new Date().toLocaleTimeString("pt-BR")+" - "+text;
+}
+
+function connect(){
+ let name=document.getElementById("provider").value.trim();
+ if(!name){
+  alert("Digite o nome da mineradora.");
+  return;
+ }
+ document.getElementById("connection").textContent=
+ "Cadastro demonstrativo: "+name+". API ainda não conectada.";
+ addHistory("Mineradora cadastrada: "+name);
+}
+</script>
+</body>
+</html>
