@@ -1,144 +1,575 @@
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#10141d">
+<meta name="theme-color" content="#080d18">
 <title>Venix Crypto Digital</title>
+
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;background:#10141d;color:#fff;
- font-family:Arial,sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-header{
- padding:22px 18px;background:#171e2a;
- border-bottom:1px solid #30394a;
+
+body {
+  font-family: Arial, sans-serif;
+  background: #080d18;
+  color: #ffffff;
 }
-.logo{font-size:25px;font-weight:bold;color:#f7931a}
-.logo span{color:white}
-header small{color:#9da9bb}
-main{padding:18px;max-width:600px;margin:auto}
-.card{
- background:#1b2432;border:1px solid #303b4d;
- border-radius:15px;padding:20px;margin-bottom:16px;
+
+header {
+  background: #101a2c;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #26354c;
 }
-.label{color:#aab5c5;font-size:13px}
-.balance{font-size:30px;font-weight:bold;margin:12px 0}
-.btc{color:#f7931a}
-button{
- border:0;border-radius:10px;padding:14px;
- font-size:15px;font-weight:bold;cursor:pointer;
+
+.logo {
+  color: #ff9418;
+  font-size: 23px;
+  font-weight: bold;
 }
-.primary{background:#f7931a;color:#111;width:100%}
-.secondary{background:#303b4d;color:white;width:100%;margin-top:10px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.value{font-size:20px;font-weight:bold;margin-top:10px}
-.status{color:#f7931a;font-size:14px}
-input{
- width:100%;padding:13px;border-radius:9px;
- background:#101722;color:white;border:1px solid #39475b;
- margin:10px 0;
+
+.status {
+  color: #19d995;
+  font-size: 12px;
 }
-footer{text-align:center;color:#78869a;padding:25px;font-size:12px}
+
+.container {
+  display: flex;
+  min-height: calc(100vh - 65px);
+}
+
+.sidebar {
+  width: 220px;
+  background: #101a2c;
+  padding: 20px 12px;
+}
+
+.sidebar button {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 8px;
+  border: none;
+  border-radius: 8px;
+  text-align: left;
+  color: #cbd5e1;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.sidebar button:hover,
+.sidebar button.active {
+  background: #ff9418;
+  color: #080d18;
+  font-weight: bold;
+}
+
+main {
+  flex: 1;
+  padding: 25px;
+  min-width: 0;
+}
+
+h1 {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #8998ad;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.card {
+  background: #121e31;
+  border: 1px solid #25364d;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.card small {
+  color: #91a0b5;
+}
+
+.card h2 {
+  margin-top: 12px;
+  color: #ff9418;
+  font-size: 23px;
+}
+
+.panel {
+  background: #121e31;
+  border: 1px solid #25364d;
+  border-radius: 12px;
+  padding: 22px;
+  margin-bottom: 20px;
+}
+
+.panel h3 {
+  margin-bottom: 18px;
+}
+
+button.action {
+  background: #ff9418;
+  color: #101522;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 5px 5px 5px 0;
+}
+
+button.secondary {
+  background: #26364e;
+  color: white;
+}
+
+button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+#timer {
+  font-size: 42px;
+  color: #ff9418;
+  font-weight: bold;
+  margin: 20px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress {
+  background: #26364e;
+  height: 9px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+.progress div {
+  height: 100%;
+  width: 0%;
+  background: #ff9418;
+  transition: width .3s;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: 13px 8px;
+  border-bottom: 1px solid #26364e;
+  text-align: left;
+  font-size: 13px;
+}
+
+th {
+  color: #ff9418;
+}
+
+.green {
+  color: #19d995;
+}
+
+.muted {
+  color: #91a0b5;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+input {
+  background: #080d18;
+  border: 1px solid #35445a;
+  color: white;
+  padding: 12px;
+  border-radius: 7px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+footer {
+  color: #718198;
+  text-align: center;
+  padding: 20px;
+  font-size: 12px;
+}
+
+@media(max-width:700px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    padding: 8px;
+  }
+
+  .sidebar button {
+    min-width: max-content;
+    margin: 0 4px;
+    padding: 12px;
+  }
+
+  main {
+    padding: 16px;
+  }
+
+  #timer {
+    font-size: 34px;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <header>
- <div class="logo">VENIX <span>CRYPTO</span></div>
- <small>DIGITAL MINING PLATFORM</small>
+  <div class="logo">VENIX CRYPTO DIGITAL</div>
+  <div class="status">● SISTEMA DEMONSTRATIVO</div>
 </header>
 
+<div class="container">
+
+<nav class="sidebar">
+  <button class="active" data-page="dashboard">🏠 Painel</button>
+  <button data-page="mineracao">⛏ Mineração</button>
+  <button data-page="carteira">💰 Carteira</button>
+  <button data-page="historico">📊 Histórico</button>
+  <button data-page="planos">⭐ Planos</button>
+  <button data-page="perfil">👤 Perfil</button>
+</nav>
+
 <main>
- <div class="card">
-  <div class="label">SALDO DEMONSTRATIVO</div>
-  <div class="balance btc" id="balance">0.00000000 BTC</div>
-  <div class="label">Carteira de demonstração</div>
- </div>
 
- <div class="grid">
-  <div class="card">
-   <div class="label">MINERAÇÃO</div>
-   <div class="value status" id="status">Desligada</div>
+<section id="dashboard" class="page active">
+  <h1>Painel Principal</h1>
+  <p class="subtitle">Bem-vindo ao Venix Crypto Digital</p>
+
+  <div class="cards">
+    <div class="card">
+      <small>Saldo demonstrativo</small>
+      <h2>R$ 0,00</h2>
+    </div>
+
+    <div class="card">
+      <small>Bitcoin (BTC)</small>
+      <h2>BTC</h2>
+    </div>
+
+    <div class="card">
+      <small>Status da mineração</small>
+      <h2 id="statusMineracao">Parado</h2>
+    </div>
+
+    <div class="card">
+      <small>Tempo de atividade</small>
+      <h2 id="tempoPainel">00:00:00</h2>
+    </div>
   </div>
-  <div class="card">
-   <div class="label">HASHRATE</div>
-   <div class="value" id="hash">0 TH/s</div>
+
+  <div class="panel">
+    <h3>Visão geral</h3>
+    <p class="muted">
+      Acompanhe suas atividades e utilize as ferramentas
+      disponíveis no painel Venix.
+    </p>
   </div>
- </div>
 
- <div class="card">
-  <h3>Painel de mineração</h3>
-  <p class="label">Simule o funcionamento da plataforma.</p>
-  <button class="primary" onclick="toggleMining()" id="mineBtn">
-   INICIAR DEMONSTRAÇÃO
-  </button>
-  <p class="label" id="message">Nenhuma mineradora conectada.</p>
- </div>
+  <div class="panel">
+    <h3>Criptomoedas</h3>
+    <table>
+      <tr><th>Moeda</th><th>Símbolo</th><th>Status</th></tr>
+      <tr><td>Bitcoin</td><td>BTC</td><td class="green">Disponível</td></tr>
+      <tr><td>Ethereum</td><td>ETH</td><td class="green">Disponível</td></tr>
+      <tr><td>Solana</td><td>SOL</td><td class="green">Disponível</td></tr>
+    </table>
+    <p class="muted">Cotações e operações reais ainda não estão conectadas.</p>
+  </div>
+</section>
 
- <div class="card">
-  <h3>Conectar mineradora</h3>
-  <p class="label">Área preparada para futuras integrações via API.</p>
-  <input id="provider" placeholder="Nome da mineradora">
-  <button class="secondary" onclick="connect()">CADASTRAR INTEGRAÇÃO</button>
-  <p class="label" id="connection">Nenhuma integração cadastrada.</p>
- </div>
+<section id="mineracao" class="page">
+  <h1>Central de Mineração</h1>
+  <p class="subtitle">Controle demonstrativo de atividade</p>
 
- <div class="card">
-  <h3>Histórico de operações</h3>
-  <p class="label" id="history">Nenhuma operação registrada.</p>
- </div>
+  <div class="panel">
+    <h3>Temporizador de atividade</h3>
+    <div id="timer">00:00:00</div>
+
+    <button class="action" id="startBtn">▶ Iniciar</button>
+    <button class="action secondary" id="pauseBtn">Ⅱ Pausar</button>
+    <button class="action secondary" id="resetBtn">↻ Zerar</button>
+
+    <div class="progress">
+      <div id="progressBar"></div>
+    </div>
+
+    <p class="muted" id="timerStatus" style="margin-top:15px">
+      Temporizador parado.
+    </p>
+  </div>
+
+  <div class="panel">
+    <h3>Informações</h3>
+    <p class="muted">
+      Este temporizador registra o tempo de atividade nesta
+      demonstração. Ele não executa mineração real de criptomoedas.
+    </p>
+  </div>
+</section>
+
+<section id="carteira" class="page">
+  <h1>Minha Carteira</h1>
+  <p class="subtitle">Área demonstrativa de ativos digitais</p>
+
+  <div class="panel">
+    <h3>Saldo disponível</h3>
+    <h2 style="color:#ff9418">R$ 0,00</h2>
+    <p class="muted">Nenhum depósito ou saque está conectado.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Ativos</h3>
+    <table>
+      <tr><th>Ativo</th><th>Quantidade</th></tr>
+      <tr><td>Bitcoin</td><td>0 BTC</td></tr>
+      <tr><td>Ethereum</td><td>0 ETH</td></tr>
+      <tr><td>Solana</td><td>0 SOL</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="historico" class="page">
+  <h1>Histórico</h1>
+  <p class="subtitle">Registro das atividades desta sessão</p>
+
+  <div class="panel">
+    <table>
+      <thead>
+        <tr>
+          <th>Atividade</th>
+          <th>Horário</th>
+        </tr>
+      </thead>
+      <tbody id="historyList">
+        <tr><td colspan="2">Nenhuma atividade registrada.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="planos" class="page">
+  <h1>Planos Venix</h1>
+  <p class="subtitle">Área de apresentação de planos</p>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Plano Inicial</h3>
+      <h2>Gratuito</h2>
+      <p class="muted">Acesso demonstrativo.</p>
+    </div>
+
+    <div class="card">
+      <h3>Plano Pro</h3>
+      <h2>Em breve</h2>
+      <p class="muted">Funcionalidades futuras.</p>
+    </div>
+
+    <div class="card">
+      <h3>Plano Premium</h3>
+      <h2>Em breve</h2>
+      <p class="muted">Funcionalidades futuras.</p>
+    </div>
+  </div>
+</section>
+
+<section id="perfil" class="page">
+  <h1>Meu Perfil</h1>
+  <p class="subtitle">Configurações do usuário</p>
+
+  <div class="panel">
+    <h3>Informações pessoais</h3>
+    <label>Nome</label>
+    <input type="text" id="userName" placeholder="Digite seu nome">
+
+    <label>E-mail</label>
+    <input type="email" placeholder="Digite seu e-mail">
+
+    <button class="action" id="saveProfile">Salvar perfil</button>
+    <p class="muted" id="profileMessage"></p>
+  </div>
+</section>
+
 </main>
+</div>
 
 <footer>
- VENIX CRYPTO DIGITAL V1.0<br>
- Protótipo demonstrativo. Sem mineração ou pagamentos reais.
+  VENIX CRYPTO DIGITAL © 2026 - Versão demonstrativa
 </footer>
 
 <script>
-let mining=false;
-let balance=0;
-let timer=null;
+"use strict";
 
-function toggleMining(){
- mining=!mining;
- document.getElementById("status").textContent=
- mining?"Demonstração ativa":"Desligada";
- document.getElementById("hash").textContent=
- mining?"100 TH/s (simulado)":"0 TH/s";
- document.getElementById("mineBtn").textContent=
- mining?"PARAR DEMONSTRAÇÃO":"INICIAR DEMONSTRAÇÃO";
- document.getElementById("message").textContent=
- mining?"Simulação em execução. Nenhum BTC real está sendo minerado.":"Demonstração pausada.";
- if(mining){
-  addHistory("Demonstração iniciada");
-  timer=setInterval(()=>{
-   balance+=0.00000001;
-   document.getElementById("balance").textContent=
-   balance.toFixed(8)+" BTC (SIMULADO)";
-  },3000);
- }else{
-  clearInterval(timer);
-  addHistory("Demonstração pausada");
- }
+// NAVEGAÇÃO
+const menuButtons = document.querySelectorAll(".sidebar button");
+const pages = document.querySelectorAll(".page");
+
+menuButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    const target = button.dataset.page;
+
+    pages.forEach(page => page.classList.remove("active"));
+    menuButtons.forEach(item => item.classList.remove("active"));
+
+    document.getElementById(target).classList.add("active");
+    button.classList.add("active");
+  });
+});
+
+// TEMPORIZADOR
+let seconds = 0;
+let timerInterval = null;
+let running = false;
+
+const timerDisplay = document.getElementById("timer");
+const panelTimer = document.getElementById("tempoPainel");
+const timerStatus = document.getElementById("timerStatus");
+const miningStatus = document.getElementById("statusMineracao");
+const progressBar = document.getElementById("progressBar");
+
+function formatTime(total) {
+  const hours = Math.floor(total / 3600);
+  const minutes = Math.floor((total % 3600) / 60);
+  const secs = total % 60;
+
+  return [hours, minutes, secs]
+    .map(value => String(value).padStart(2, "0"))
+    .join(":");
 }
 
-function addHistory(text){
- document.getElementById("history").textContent=
- new Date().toLocaleTimeString("pt-BR")+" - "+text;
+function updateTimer() {
+  const formatted = formatTime(seconds);
+
+  timerDisplay.textContent = formatted;
+  panelTimer.textContent = formatted;
+
+  progressBar.style.width = (seconds % 60) / 60 * 100 + "%";
 }
 
-function connect(){
- let name=document.getElementById("provider").value.trim();
- if(!name){
-  alert("Digite o nome da mineradora.");
-  return;
- }
- document.getElementById("connection").textContent=
- "Cadastro demonstrativo: "+name+". API ainda não conectada.";
- addHistory("Mineradora cadastrada: "+name);
+function addHistory(activity) {
+  const history = document.getElementById("historyList");
+
+  if (history.querySelector("td[colspan]")) {
+    history.innerHTML = "";
+  }
+
+  const row = document.createElement("tr");
+  const activityCell = document.createElement("td");
+  const timeCell = document.createElement("td");
+
+  activityCell.textContent = activity;
+  timeCell.textContent = new Date().toLocaleTimeString("pt-BR");
+
+  row.appendChild(activityCell);
+  row.appendChild(timeCell);
+  history.prepend(row);
 }
+
+function startTimer() {
+  if (running) return;
+
+  running = true;
+
+  miningStatus.textContent = "Ativo";
+  timerStatus.textContent = "Temporizador em execução.";
+
+  addHistory("Temporizador iniciado");
+
+  timerInterval = setInterval(() => {
+    seconds++;
+    updateTimer();
+  }, 1000);
+}
+
+function pauseTimer() {
+  if (!running) return;
+
+  clearInterval(timerInterval);
+  timerInterval = null;
+  running = false;
+
+  miningStatus.textContent = "Pausado";
+  timerStatus.textContent = "Temporizador pausado.";
+
+  addHistory("Temporizador pausado");
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+
+  timerInterval = null;
+  running = false;
+  seconds = 0;
+
+  miningStatus.textContent = "Parado";
+  timerStatus.textContent = "Temporizador zerado.";
+
+  updateTimer();
+  addHistory("Temporizador zerado");
+}
+
+document.getElementById("startBtn")
+  .addEventListener("click", startTimer);
+
+document.getElementById("pauseBtn")
+  .addEventListener("click", pauseTimer);
+
+document.getElementById("resetBtn")
+  .addEventListener("click", resetTimer);
+
+// PERFIL
+document.getElementById("saveProfile")
+  .addEventListener("click", () => {
+    const name = document.getElementById("userName").value.trim();
+    const message = document.getElementById("profileMessage");
+
+    if (!name) {
+      message.textContent = "Digite seu nome antes de salvar.";
+      return;
+    }
+
+    message.textContent = "Nome atualizado nesta sessão!";
+  });
+
+// INICIALIZAÇÃO
+updateTimer();
 </script>
+
 </body>
 </html>
